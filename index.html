@@ -20,6 +20,50 @@
             position: relative;
         }
 
+        /* Kirish Ekranining Modal Oynasi (Splash Screen) */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 7, 0.98);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            backdrop-filter: blur(15px);
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .splash-content {
+            background: linear-gradient(145deg, rgba(22, 22, 30, 0.95), rgba(10, 10, 15, 0.98));
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 24px;
+            padding: 40px 25px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 25px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-open {
+            margin-top: 20px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #d4af37, #b8860b);
+            color: #000;
+            font-weight: 700;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .btn-open:hover { transform: scale(1.05); }
+
         /* Oltin Zarrachalar Kanvasi */
         #sparkles-canvas {
             position: fixed;
@@ -91,10 +135,6 @@
             transition: transform 0.5s ease;
         }
 
-        .hero-img:hover {
-            transform: scale(1.02);
-        }
-
         .quote-arabic {
             font-size: 1.3rem;
             color: #d4af37;
@@ -158,31 +198,10 @@
             to { box-shadow: 0 0 20px rgba(212, 175, 55, 1); }
         }
 
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 10px;
-        }
-
-        .gallery-img {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            border-radius: 12px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            transition: 0.3s;
-        }
-
-        .gallery-img:hover {
-            transform: scale(1.04);
-            border-color: #d4af37;
-        }
-
-        .btn-map {
+        .btn-map, .btn-cal {
             display: inline-block;
-            margin-top: 14px;
-            padding: 12px 24px;
+            margin-top: 10px;
+            padding: 12px 20px;
             background: linear-gradient(135deg, #d4af37, #b8860b);
             color: #000;
             font-weight: 700;
@@ -190,9 +209,17 @@
             border-radius: 30px;
             box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
             transition: 0.3s;
+            font-size: 0.85rem;
+            border: none;
+            cursor: pointer;
         }
 
-        .btn-map:hover { transform: scale(1.05); }
+        .btn-cal-secondary {
+            background: rgba(212, 175, 55, 0.15);
+            color: #d4af37;
+            border: 1px solid #d4af37;
+            box-shadow: none;
+        }
 
         .coords-badge {
             display: inline-block;
@@ -230,27 +257,19 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             transition: 0.3s;
         }
-
-        .music-btn:hover {
-            background: #d4af37;
-            color: #000;
-        }
-
-        .rsvp-btn {
-            padding: 10px 20px;
-            border-radius: 10px;
-            border: 1px solid #d4af37;
-            background: transparent;
-            color: #fff;
-            margin: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .rsvp-btn.active { background: #d4af37; color: #000; font-weight: bold; }
     </style>
 </head>
 <body>
+
+    <!-- Kirish Ekranining Modali (Splash Screen) -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <div style="font-size: 3rem; margin-bottom: 10px;">✉️</div>
+            <div class="monogram" style="font-size: 3.2rem;">X & G</div>
+            <p style="color: #cbd5e1; margin-top: 15px; font-size: 0.9rem;">Nikoh To'yi va Nahorgi Osh Taklifnomasi</p>
+            <button class="btn-open" onclick="openInvitation()">Taklifnomani Ochish ✨</button>
+        </div>
+    </div>
 
     <!-- Oltin Zarralar Fon Animatsiyasi -->
     <canvas id="sparkles-canvas"></canvas>
@@ -292,18 +311,7 @@
             <p class="quote" style="margin-top: 12px;">Hayotimizning eng go'zal kunda yonimizda bo'lishingizdan mamnunmiz!</p>
         </div>
 
-        <!-- 6-LIST: Foto Galereya -->
-        <div class="block">
-            <div style="color: #d4af37; font-weight: 600; margin-bottom: 8px;">Foto Galereya</div>
-            <div class="gallery-grid">
-                <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=500&q=80" class="gallery-img" alt="Gallery 1">
-                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=500&q=80" class="gallery-img" alt="Gallery 2">
-                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=500&q=80" class="gallery-img" alt="Gallery 3">
-                <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=500&q=80" class="gallery-img" alt="Gallery 4">
-            </div>
-        </div>
-
-        <!-- 7-LIST: Taymer -->
+        <!-- 6-LIST: Taymer -->
         <div class="block">
             <div style="font-size: 0.8rem; color: #d4af37; text-transform: uppercase;">To'ygacha Qolgan Vaqt:</div>
             <div class="timer-grid">
@@ -314,7 +322,7 @@
             </div>
         </div>
 
-        <!-- 8-LIST: Kalendar -->
+        <!-- 7-LIST: Kalendar va Kalendarga Saqlash -->
         <div class="block">
             <div style="color: #d4af37; font-weight: 600;">Sentyabr 2026</div>
             <table class="calendar-table">
@@ -325,48 +333,46 @@
                 <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td class="highlight-date">27</td></tr>
                 <tr><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
             </table>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Nikoh+To%27yi+-+Nahorgi+Osh&dates=20260927T030000Z/20260927T060000Z&details=Gulyora+To%27xtasinova+to%27yga+taklif+etadi&location=Xonqiz+qishlog%27i,+Yashnaobod+ko%27chasi+65-uy" target="_blank" class="btn-cal">📅 Google Kalendarga saqlash</a>
+                <button onclick="downloadIcs()" class="btn-cal btn-cal-secondary">🍏 Apple / Phone Kalendarga saqlash</button>
+            </div>
         </div>
 
-        <!-- 9-LIST: Nahorgi Osh -->
+        <!-- 8-LIST: Nahorgi Osh -->
         <div class="block">
             <div style="font-size: 0.85rem; color: #cbd5e1; text-transform: uppercase;">Nahorgi Osh Dasturxoni</div>
             <div style="font-size: 2.2rem; font-weight: 700; color: #f59e0b; margin: 5px 0;">Soat 08:00 da</div>
             <p style="font-size: 0.85rem; color: #94a3b8;">Aziz mehmonimiz, to'y oshimizga marhamat qiling!</p>
         </div>
 
-        <!-- 10-LIST: Manzil -->
+        <!-- 9-LIST: Manzil -->
         <div class="block">
             <div style="color: #d4af37; font-weight: 600;">Manzilimiz:</div>
             <p style="font-size: 0.9rem; color: #e2e8f0; margin-top: 5px;">Farg'ona viloyati, Farg'ona tumani, Xonqiz qishlog'i, Yashnaobod ko'chasi, 65-uy</p>
             <div class="coords-badge">📍 Coords: 40.292947, 71.488362</div>
         </div>
 
-        <!-- 11-LIST: Google Maps Xaritasi -->
+        <!-- 10-LIST: Google Maps Xaritasi -->
         <div class="block">
             <div style="color: #d4af37; font-weight: 600; margin-bottom: 5px;">Xarita</div>
             <iframe class="map-frame" src="https://maps.google.com/maps?q=40.292947,71.488362&z=17&output=embed" allowfullscreen="" loading="lazy"></iframe>
         </div>
 
-        <!-- 12-LIST: Marshrut Tugmasi -->
+        <!-- 11-LIST: Marshrut Tugmasi -->
         <div class="block">
             <p style="font-size: 0.85rem; color: #94a3b8;">Avtonavigatsiya orqali osongina yetib keling:</p>
             <a href="https://www.google.com/maps/dir/?api=1&destination=40.292947,71.488362" target="_blank" class="btn-map">📍 Google Maps'da Ochish</a>
         </div>
 
-        <!-- 13-LIST: Tashrifni Tasdiqlash -->
-        <div class="block">
-            <div style="color: #d4af37; font-weight: 600; margin-bottom: 8px;">Tashrifingizni tasdiqlaysizmi?</div>
-            <button class="rsvp-btn" onclick="selectRsvp(this)">Albatta boraman ✨</button>
-            <button class="rsvp-btn" onclick="selectRsvp(this)">Afsuski borolmayman 🕊️</button>
-        </div>
-
-        <!-- 14-LIST: Taklif Etuvchi -->
+        <!-- 12-LIST: Taklif Etuvchi -->
         <div class="block">
             <p style="font-size: 0.85rem; color: #94a3b8;">Ehtirom bilan taklif etuvchi:</p>
             <div style="font-size: 1.2rem; font-weight: 600; color: #d4af37; margin-top: 5px;">Gulyora To'xtasinova</div>
         </div>
 
-        <!-- 15-LIST: Yakuniy Tilak -->
+        <!-- 13-LIST: Yakuniy Tilak -->
         <div class="block">
             <div style="font-size: 1.8rem; color: #d4af37;">X & G</div>
             <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 5px;">Tashrifingiz biz uchun yuksak sharafdir!</p>
@@ -376,6 +382,22 @@
     </div>
 
     <script>
+        // Kirish ekranini yopish va musiqani yoqish
+        function openInvitation() {
+            const splash = document.getElementById('splash-screen');
+            splash.style.opacity = '0';
+            splash.style.visibility = 'hidden';
+            
+            // Audio avtomatik ijrosi
+            const audio = document.getElementById('bg-audio');
+            const btn = document.getElementById('musicBtn');
+            audio.play().then(() => {
+                btn.innerText = "🎵 Musiqa: On";
+            }).catch(() => {
+                btn.innerText = "🎵 Musiqa: Off";
+            });
+        }
+
         // Countdown Timer
         const weddingDate = new Date(2026, 8, 27, 8, 0, 0).getTime();
 
@@ -411,13 +433,30 @@
             }
         }
 
-        // RSVP Selection
-        function selectRsvp(btn) {
-            document.querySelectorAll('.rsvp-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+        // Apple / Mobile .ics faylini yaratish va yuklash
+        function downloadIcs() {
+            const icsData = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Nikoh Toyi Taklifnomasi//UZ
+BEGIN:VEVENT
+SUMMARY:Nikoh To'yi - Nahorgi Osh
+DESCRIPTION:Gulyora To'xtasinova to'yga taklif etadi.
+LOCATION:Xonqiz qishlog'i, Yashnaobod ko'chasi 65-uy
+DTSTART:20260927T030000Z
+DTEND:20260927T060000Z
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'toy_taklifnomasi.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
-        // Oltin Zarrachalar Animatsiyasi (Canvas Sparkles)
+        // Canvas Sparkles
         const canvas = document.getElementById('sparkles-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
