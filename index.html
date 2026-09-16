@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikoh To'yi - Nahorgi Osh Taklifnomasi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #050507;
+            color: #f8fafc;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 10px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Oltin Zarrachalar Kanvasi */
+        #sparkles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 480px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .block {
+            background: linear-gradient(145deg, rgba(22, 22, 30, 0.92), rgba(10, 10, 15, 0.96));
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 22px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7), 0 0 18px rgba(212, 175, 55, 0.15);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .monogram {
+            font-family: 'Alex Brush', cursive;
+            font-size: 4rem;
+            color: #d4af37;
+            text-shadow: 0 0 20px rgba(212,175,55,0.6);
+            letter-spacing: 2px;
+        }
+
+        .main-title {
+            font-family: 'Alex Brush', cursive;
+            font-size: 3.2rem;
+            color: #d4af37;
+            margin-top: -10px;
+        }
+
+        .subtitle {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #94a3b8;
+            margin-top: 5px;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-img:hover {
+            transform: scale(1.02);
+        }
+
+        .quote-arabic {
+            font-size: 1.3rem;
+            color: #d4af37;
+            margin-bottom: 8px;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .timer-grid {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+        }
+
+        .time-box {
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 12px;
+            padding: 10px;
+            width: 22%;
+        }
+
+        .time-num {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #f59e0b;
+        }
+
+        .time-lbl {
+            font-size: 0.65rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        .calendar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.85rem;
+        }
+
+        .calendar-table th { color: #d4af37; padding: 6px; }
+        .calendar-table td { padding: 8px; color: #cbd5e1; }
+
+        .highlight-date {
+            background: #d4af37;
+            color: #000 !important;
+            font-weight: bold;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.9);
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 8px rgba(212, 175, 55, 0.6); }
+            to { box-shadow: 0 0 20px rgba(212, 175, 55, 1); }
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: 0.3s;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.04);
+            border-color: #d4af37;
+        }
+
+        .btn-map {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #d4af37, #b8860b);
+            color: #000;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 30px;
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+            transition: 0.3s;
+        }
+
+        .btn-map:hover { transform: scale(1.05); }
+
+        .coords-badge {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 4px 10px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px dashed rgba(212, 175, 55, 0.4);
+            border-radius: 8px;
+            font-size: 0.75rem;
+            color: #cbd5e1;
+        }
+
+        .map-frame {
+            width: 100%;
+            height: 200px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        .music-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(212, 175, 55, 0.25);
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            padding: 10px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: 0.3s;
+        }
+
+        .music-btn:hover {
+            background: #d4af37;
+            color: #000;
+        }
+
+        .rsvp-btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 1px solid #d4af37;
+            background: transparent;
+            color: #fff;
+            margin: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .rsvp-btn.active { background: #d4af37; color: #000; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <!-- Oltin Zarralar Fon Animatsiyasi -->
+    <canvas id="sparkles-canvas"></canvas>
+
+    <!-- Musiqa Boshqaruvi -->
+    <button class="music-btn" id="musicBtn" onclick="toggleAudio()">🎵 Musiqa: Off</button>
+    <audio id="bg-audio" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3"></audio>
+
+    <div class="container">
+
+        <!-- 1-LIST: Monogramma -->
+        <div class="block">
+            <div class="monogram">X & G</div>
+            <div class="subtitle">Eksklyuziv Taklifnoma</div>
+        </div>
+
+        <!-- 2-LIST: Bosh Sarlavha -->
+        <div class="block">
+            <div style="font-size: 2.2rem;">💍</div>
+            <div class="main-title">Nikoh To'yi</div>
+            <div class="subtitle">Muhtaram Mehmonimiz</div>
+        </div>
+
+        <!-- 3-LIST: Kelin-Kuyov Fotosurati -->
+        <div class="block">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="Couple" class="hero-img">
+        </div>
+
+        <!-- 4-LIST: Muqaddas Oyat -->
+        <div class="block">
+            <div class="quote-arabic">وَأَلَّفَ بَيْنَ قُلُوبِهِمْ</div>
+            <p class="quote">"Va U ularning qalblarini sevgida birlashtirdi."</p>
+            <p style="font-size: 0.75rem; color: #d4af37; margin-top: 6px;">[Anfol surasi, 63-oyat]</p>
+        </div>
+
+        <!-- 5-LIST: Uzuklar va Ehtirom -->
+        <div class="block">
+            <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=800&q=80" alt="Rings" class="hero-img">
+            <p class="quote" style="margin-top: 12px;">Hayotimizning eng go'zal kunda yonimizda bo'lishingizdan mamnunmiz!</p>
+        </div>
+
+        <!-- 6-LIST: Foto Galereya -->
+        <div class="block">
+            <div style="color: #d4af37; font-weight: 600; margin-bottom: 8px;">Foto Galereya</div>
+            <div class="gallery-grid">
+                <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=500&q=80" class="gallery-img" alt="Gallery 1">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=500&q=80" class="gallery-img" alt="Gallery 2">
+                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=500&q=80" class="gallery-img" alt="Gallery 3">
+                <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=500&q=80" class="gallery-img" alt="Gallery 4">
+            </div>
+        </div>
+
+        <!-- 7-LIST: Taymer -->
+        <div class="block">
+            <div style="font-size: 0.8rem; color: #d4af37; text-transform: uppercase;">To'ygacha Qolgan Vaqt:</div>
+            <div class="timer-grid">
+                <div class="time-box"><div id="days" class="time-num">00</div><div class="time-lbl">Kun</div></div>
+                <div class="time-box"><div id="hours" class="time-num">00</div><div class="time-lbl">Soat</div></div>
+                <div class="time-box"><div id="minutes" class="time-num">00</div><div class="time-lbl">Daqiqa</div></div>
+                <div class="time-box"><div id="seconds" class="time-num">00</div><div class="time-lbl">Soniya</div></div>
+            </div>
+        </div>
+
+        <!-- 8-LIST: Kalendar -->
+        <div class="block">
+            <div style="color: #d4af37; font-weight: 600;">Sentyabr 2026</div>
+            <table class="calendar-table">
+                <tr><th>Du</th><th>Se</th><th>Ch</th><th>Pa</th><th>Ju</th><th>Sh</th><th>Ya</th></tr>
+                <tr><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+                <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
+                <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
+                <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td class="highlight-date">27</td></tr>
+                <tr><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
+            </table>
+        </div>
+
+        <!-- 9-LIST: Nahorgi Osh -->
+        <div class="block">
+            <div style="font-size: 0.85rem; color: #cbd5e1; text-transform: uppercase;">Nahorgi Osh Dasturxoni</div>
+            <div style="font-size: 2.2rem; font-weight: 700; color: #f59e0b; margin: 5px 0;">Soat 08:00 da</div>
+            <p style="font-size: 0.85rem; color: #94a3b8;">Aziz mehmonimiz, to'y oshimizga marhamat qiling!</p>
+        </div>
+
+        <!-- 10-LIST: Manzil -->
+        <div class="block">
+            <div style="color: #d4af37; font-weight: 600;">Manzilimiz:</div>
+            <p style="font-size: 0.9rem; color: #e2e8f0; margin-top: 5px;">Farg'ona viloyati, Farg'ona tumani, Xonqiz qishlog'i, Yashnaobod ko'chasi, 65-uy</p>
+            <div class="coords-badge">📍 Coords: 40.292947, 71.488362</div>
+        </div>
+
+        <!-- 11-LIST: Google Maps Xaritasi -->
+        <div class="block">
+            <div style="color: #d4af37; font-weight: 600; margin-bottom: 5px;">Xarita</div>
+            <iframe class="map-frame" src="https://maps.google.com/maps?q=40.292947,71.488362&z=17&output=embed" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <!-- 12-LIST: Marshrut Tugmasi -->
+        <div class="block">
+            <p style="font-size: 0.85rem; color: #94a3b8;">Avtonavigatsiya orqali osongina yetib keling:</p>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=40.292947,71.488362" target="_blank" class="btn-map">📍 Google Maps'da Ochish</a>
+        </div>
+
+        <!-- 13-LIST: Tashrifni Tasdiqlash -->
+        <div class="block">
+            <div style="color: #d4af37; font-weight: 600; margin-bottom: 8px;">Tashrifingizni tasdiqlaysizmi?</div>
+            <button class="rsvp-btn" onclick="selectRsvp(this)">Albatta boraman ✨</button>
+            <button class="rsvp-btn" onclick="selectRsvp(this)">Afsuski borolmayman 🕊️</button>
+        </div>
+
+        <!-- 14-LIST: Taklif Etuvchi -->
+        <div class="block">
+            <p style="font-size: 0.85rem; color: #94a3b8;">Ehtirom bilan taklif etuvchi:</p>
+            <div style="font-size: 1.2rem; font-weight: 600; color: #d4af37; margin-top: 5px;">Gulyora To'xtasinova</div>
+        </div>
+
+        <!-- 15-LIST: Yakuniy Tilak -->
+        <div class="block">
+            <div style="font-size: 1.8rem; color: #d4af37;">X & G</div>
+            <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 5px;">Tashrifingiz biz uchun yuksak sharafdir!</p>
+            <div style="font-size: 1.2rem; margin-top: 8px;">✨ 🕊️ ✨</div>
+        </div>
+
+    </div>
+
+    <script>
+        // Countdown Timer
+        const weddingDate = new Date(2026, 8, 27, 8, 0, 0).getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = weddingDate - now;
+
+            if (diff > 0) {
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+                document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+                document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+                document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Audio Control
+        function toggleAudio() {
+            const audio = document.getElementById('bg-audio');
+            const btn = document.getElementById('musicBtn');
+            if (audio.paused) {
+                audio.play();
+                btn.innerText = "🎵 Musiqa: On";
+            } else {
+                audio.pause();
+                btn.innerText = "🎵 Musiqa: Off";
+            }
+        }
+
+        // RSVP Selection
+        function selectRsvp(btn) {
+            document.querySelectorAll('.rsvp-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        // Oltin Zarrachalar Animatsiyasi (Canvas Sparkles)
+        const canvas = document.getElementById('sparkles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speedY = Math.random() * 0.8 + 0.2;
+                this.opacity = Math.random() * 0.8 + 0.2;
+            }
+            update() {
+                this.y -= this.speedY;
+                if (this.y < 0) {
+                    this.y = canvas.height;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 65; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+    </script>
+</body>
+</html>
