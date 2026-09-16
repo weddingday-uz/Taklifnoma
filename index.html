@@ -228,30 +228,6 @@
             margin-top: 3px;
         }
 
-        .calendar-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 12px;
-            font-size: 0.88rem;
-        }
-
-        .calendar-table th { color: #d4af37; padding: 8px; }
-        .calendar-table td { padding: 9px; color: #cbd5e1; }
-
-        .highlight-date {
-            background: linear-gradient(135deg, #d4af37, #b8860b);
-            color: #000 !important;
-            font-weight: bold;
-            border-radius: 50%;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 1);
-            animation: pulseGlow 1.8s infinite alternate;
-        }
-
-        @keyframes pulseGlow {
-            from { box-shadow: 0 0 10px rgba(212, 175, 55, 0.6); transform: scale(1); }
-            to { box-shadow: 0 0 25px rgba(212, 175, 55, 1); transform: scale(1.1); }
-        }
-
         .weather-box {
             display: flex;
             align-items: center;
@@ -367,7 +343,7 @@
     <button class="music-btn" id="musicBtn" onclick="toggleAudio()">🎵 Musiqa: Off</button>
     
     <!-- O'zbekona Mayin va Go'zal Cholg'u Kuylari (Fon Musiqasi) -->
-    <audio id="bg-audio" loop src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8263309.mp3"></audio>
+    <audio id="bg-audio" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3"></audio>
 
     <div class="container">
 
@@ -413,20 +389,7 @@
             </div>
         </div>
 
-        <!-- 7-LIST: Kalendar Sheet -->
-        <div class="block">
-            <div style="color: #d4af37; font-weight: 700; font-size: 1.1rem;">Sentyabr 2026</div>
-            <table class="calendar-table">
-                <tr><th>Du</th><th>Se</th><th>Ch</th><th>Pa</th><th>Ju</th><th>Sh</th><th>Ya</th></tr>
-                <tr><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
-                <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
-                <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
-                <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td class="highlight-date">27</td></tr>
-                <tr><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
-            </table>
-        </div>
-
-        <!-- 8-LIST: Ob-havo Ma'lumoti -->
+        <!-- 7-LIST: Ob-havo Ma'lumoti -->
         <div class="block">
             <div style="color: #d4af37; font-weight: 700; font-size: 1rem;">27-Sentyabr Ob-Havo Ma'lumoti</div>
             <div style="font-size: 0.78rem; color: #94a3b8; margin-top: 2px;">Farg'ona t., Xonqiz qishlog'i</div>
@@ -442,39 +405,39 @@
             <p style="font-size: 0.82rem; color: #cbd5e1; margin-top: 12px; font-style: italic;">"Ajoyib va samimiy ob-havoda ko'rishguncha!"</p>
         </div>
 
-        <!-- 9-LIST: Nahorgi Osh Dasturxoni -->
+        <!-- 8-LIST: Nahorgi Osh Dasturxoni -->
         <div class="block">
             <div style="font-size: 0.85rem; color: #cbd5e1; text-transform: uppercase; letter-spacing: 2px;">Nahorgi Osh Dasturxoni</div>
             <div style="font-size: 2.5rem; font-weight: 800; color: #f59e0b; margin: 6px 0; text-shadow: 0 0 15px rgba(245, 158, 11, 0.4);">Soat 08:00 da</div>
             <p style="font-size: 0.88rem; color: #94a3b8;">Aziz va muhtaram mehmonimiz, fayzli to'y oshimizga marhamat qiling!</p>
         </div>
 
-        <!-- 10-LIST: Manzil -->
+        <!-- 9-LIST: Manzil -->
         <div class="block">
             <div style="color: #d4af37; font-weight: 700; font-size: 1.05rem;">Manzilimiz:</div>
             <p style="font-size: 0.95rem; color: #e2e8f0; margin-top: 6px; line-height: 1.5;">Farg'ona viloyati, Farg'ona tumani, Xonqiz qishlog'i, Yashnaobod ko'chasi, 65-uy</p>
             <div class="coords-badge">📍 GPS: 40.292947, 71.488362</div>
         </div>
 
-        <!-- 11-LIST: Google Maps Xaritasi -->
+        <!-- 10-LIST: Google Maps Xaritasi -->
         <div class="block">
             <div style="color: #d4af37; font-weight: 700; margin-bottom: 6px;">Xarita</div>
             <iframe class="map-frame" src="https://maps.google.com/maps?q=40.292947,71.488362&z=17&output=embed" allowfullscreen="" loading="lazy"></iframe>
         </div>
 
-        <!-- 12-LIST: Navigatsiya Tugmasi -->
+        <!-- 11-LIST: Navigatsiya Tugmasi -->
         <div class="block">
             <p style="font-size: 0.85rem; color: #94a3b8;">Avtonavigatsiya orqali osongina yetib keling:</p>
             <a href="https://www.google.com/maps/dir/?api=1&destination=40.292947,71.488362" target="_blank" class="btn-map">📍 Google Maps'da Ochish</a>
         </div>
 
-        <!-- 13-LIST: Taklif Etuvchi -->
+        <!-- 12-LIST: Taklif Etuvchi -->
         <div class="block">
             <p style="font-size: 0.85rem; color: #94a3b8;">Ehtirom bilan taklif etuvchi:</p>
             <div style="font-size: 1.3rem; font-weight: 700; color: #d4af37; margin-top: 6px; letter-spacing: 1px;">Gulyora To'xtasinova</div>
         </div>
 
-        <!-- 14-LIST: Telegram Ulashish & Yakun -->
+        <!-- 13-LIST: Telegram Ulashish & Yakun -->
         <div class="block">
             <div style="font-size: 2rem; color: #d4af37;">X & G</div>
             <p style="font-size: 0.88rem; color: #cbd5e1; margin-top: 6px;">Tashrifingiz xonadonimizga quvonch va fayz bag'ishlaydi!</p>
@@ -487,7 +450,7 @@
     </div>
 
     <script>
-        // Kirish ekranini yopish va o'zbekona musiqani ijro etish
+        // Kirish ekranini yopish va musiqani ijro etish
         function openInvitation() {
             const splash = document.getElementById('splash-screen');
             splash.style.opacity = '0';
