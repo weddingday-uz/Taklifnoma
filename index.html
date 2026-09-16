@@ -20,7 +20,7 @@
             position: relative;
         }
 
-        /* Kirish Ekranining Modal Oynasi (Splash Screen) */
+        /* Kutib Olish Tabrigi Modali (Splash Screen) */
         #splash-screen {
             position: fixed;
             top: 0;
@@ -198,7 +198,7 @@
             to { box-shadow: 0 0 20px rgba(212, 175, 55, 1); }
         }
 
-        .btn-map, .btn-cal {
+        .btn-map, .btn-cal, .btn-share {
             display: inline-block;
             margin-top: 10px;
             padding: 12px 20px;
@@ -212,6 +212,7 @@
             font-size: 0.85rem;
             border: none;
             cursor: pointer;
+            width: 100%;
         }
 
         .btn-cal-secondary {
@@ -219,6 +220,12 @@
             color: #d4af37;
             border: 1px solid #d4af37;
             box-shadow: none;
+        }
+
+        .btn-share-tg {
+            background: linear-gradient(135deg, #2AABEE, #229ED9);
+            color: #ffffff;
+            box-shadow: 0 8px 20px rgba(42, 171, 238, 0.3);
         }
 
         .coords-badge {
@@ -261,12 +268,15 @@
 </head>
 <body>
 
-    <!-- Kirish Ekranining Modali (Splash Screen) -->
+    <!-- Kutib Olish Tabrigi Modali (Splash Screen) -->
     <div id="splash-screen">
         <div class="splash-content">
             <div style="font-size: 3rem; margin-bottom: 10px;">✉️</div>
             <div class="monogram" style="font-size: 3.2rem;">X & G</div>
-            <p style="color: #cbd5e1; margin-top: 15px; font-size: 0.9rem;">Nikoh To'yi va Nahorgi Osh Taklifnomasi</p>
+            <p style="color: #cbd5e1; margin-top: 15px; font-size: 0.95rem; line-height: 1.5;">
+                Assalomu alaykum, muhtaram mehmonimiz!<br>
+                Sizni baxtli kunimizga taklif etamiz.
+            </p>
             <button class="btn-open" onclick="openInvitation()">Taklifnomani Ochish ✨</button>
         </div>
     </div>
@@ -322,7 +332,7 @@
             </div>
         </div>
 
-        <!-- 7-LIST: Kalendar va Kalendarga Saqlash -->
+        <!-- 7-LIST: Kalendar va Saqlash Tugmalari -->
         <div class="block">
             <div style="color: #d4af37; font-weight: 600;">Sentyabr 2026</div>
             <table class="calendar-table">
@@ -372,11 +382,14 @@
             <div style="font-size: 1.2rem; font-weight: 600; color: #d4af37; margin-top: 5px;">Gulyora To'xtasinova</div>
         </div>
 
-        <!-- 13-LIST: Yakuniy Tilak -->
+        <!-- 13-LIST: Telegram Orqali Ulashish va Yakuniy Tilak -->
         <div class="block">
             <div style="font-size: 1.8rem; color: #d4af37;">X & G</div>
             <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 5px;">Tashrifingiz biz uchun yuksak sharafdir!</p>
-            <div style="font-size: 1.2rem; margin-top: 8px;">✨ 🕊️ ✨</div>
+            
+            <button onclick="shareTelegram()" class="btn-share btn-share-tg" style="margin-top: 15px;">🚀 Telegram Orqali Ulashish</button>
+            
+            <div style="font-size: 1.2rem; margin-top: 12px;">✨ 🕊️ ✨</div>
         </div>
 
     </div>
@@ -433,7 +446,7 @@
             }
         }
 
-        // Apple / Mobile .ics faylini yaratish va yuklash
+        // Apple / Phone .ics faylini yaratish va yuklash
         function downloadIcs() {
             const icsData = `BEGIN:VCALENDAR
 VERSION:2.0
@@ -454,6 +467,13 @@ END:VCALENDAR`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+        }
+
+        // Telegram Orqali Ulashish
+        function shareTelegram() {
+            const text = encodeURIComponent("Sizni Nikoh To'yimiz va Nahorgi Osh dasturxonimizga taklif etamiz! ✨\n\nTaklifnomani ko'rish uchun havola:");
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
         }
 
         // Canvas Sparkles
