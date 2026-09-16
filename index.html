@@ -8,63 +8,19 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: #050507;
+            background: #030305;
             color: #f8fafc;
             font-family: 'Montserrat', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px 10px;
+            padding: 25px 12px;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Kutib Olish Tabrigi Modali */
-        #splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 5, 7, 0.98);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            backdrop-filter: blur(15px);
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-        .splash-content {
-            background: linear-gradient(145deg, rgba(22, 22, 30, 0.95), rgba(10, 10, 15, 0.98));
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            border-radius: 24px;
-            padding: 40px 25px;
-            max-width: 400px;
-            width: 100%;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 25px rgba(212, 175, 55, 0.2);
-        }
-
-        .btn-open {
-            margin-top: 20px;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #d4af37, #b8860b);
-            color: #000;
-            font-weight: 700;
-            border: none;
-            border-radius: 30px;
-            font-size: 1rem;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
-            transition: transform 0.3s ease;
-        }
-
-        .btn-open:hover { transform: scale(1.05); }
-
-        /* Oltin Zarrachalar Kanvasi */
+        /* Sehrli Oltin Zarralar Kanvasi */
         #sparkles-canvas {
             position: fixed;
             top: 0;
@@ -75,52 +31,131 @@
             z-index: 1;
         }
 
+        /* Kutib Olish Modali (Splash Screen) */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 3, 5, 0.98);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            backdrop-filter: blur(20px);
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .splash-card {
+            background: linear-gradient(145deg, rgba(25, 22, 35, 0.95), rgba(10, 10, 16, 0.98));
+            border: 2px solid rgba(212, 175, 55, 0.6);
+            border-radius: 28px;
+            padding: 45px 25px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.3), inset 0 0 15px rgba(212, 175, 55, 0.2);
+            animation: pulseCard 3s infinite alternate;
+        }
+
+        @keyframes pulseCard {
+            0% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); }
+            100% { box-shadow: 0 0 60px rgba(212, 175, 55, 0.5); }
+        }
+
+        .btn-open {
+            margin-top: 25px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #f39c12, #d4af37, #b8860b);
+            background-size: 200% 200%;
+            color: #000;
+            font-weight: 800;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+            transition: all 0.4s ease;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        .btn-open:hover { transform: scale(1.08); box-shadow: 0 15px 40px rgba(212, 175, 55, 0.8); }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .container {
             max-width: 480px;
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 22px;
+            gap: 26px;
             position: relative;
             z-index: 2;
         }
 
+        /* Hasamatli Bloklar va Oltin Yaltirash */
         .block {
-            background: linear-gradient(145deg, rgba(22, 22, 30, 0.92), rgba(10, 10, 15, 0.96));
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            border-radius: 22px;
-            padding: 25px 20px;
+            background: linear-gradient(145deg, rgba(22, 22, 32, 0.93), rgba(8, 8, 14, 0.97));
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 24px;
+            padding: 28px 22px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7), 0 0 18px rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 20px rgba(212, 175, 55, 0.12);
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(8px);
-            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            backdrop-filter: blur(10px);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+        .block::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 6s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .block:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9), 0 0 30px rgba(212, 175, 55, 0.3);
+            border-color: rgba(212, 175, 55, 0.8);
         }
 
         .monogram {
             font-family: 'Alex Brush', cursive;
-            font-size: 4rem;
+            font-size: 4.5rem;
             color: #d4af37;
-            text-shadow: 0 0 20px rgba(212,175,55,0.6);
-            letter-spacing: 2px;
+            text-shadow: 0 0 25px rgba(212,175,55,0.8), 0 0 10px rgba(255,255,255,0.3);
+            letter-spacing: 3px;
         }
 
         .main-title {
             font-family: 'Alex Brush', cursive;
-            font-size: 3.2rem;
+            font-size: 3.5rem;
             color: #d4af37;
             margin-top: -10px;
+            text-shadow: 0 0 20px rgba(212,175,55,0.5);
         }
 
         .subtitle {
-            font-size: 0.8rem;
-            letter-spacing: 3px;
+            font-size: 0.82rem;
+            letter-spacing: 4px;
             text-transform: uppercase;
             color: #94a3b8;
             margin-top: 5px;
@@ -128,148 +163,164 @@
 
         .hero-img {
             width: 100%;
-            height: 260px;
+            height: 270px;
             object-fit: cover;
-            border-radius: 16px;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            transition: transform 0.5s ease;
+            border-radius: 18px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            transition: transform 0.6s ease, filter 0.6s ease;
+        }
+
+        .hero-img:hover {
+            transform: scale(1.03);
+            filter: brightness(1.08);
+        }
+
+        .floating-icon {
+            font-size: 2.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .quote-arabic {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: #d4af37;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(212,175,55,0.5);
         }
 
         .quote {
             font-style: italic;
             color: #e2e8f0;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            font-size: 0.98rem;
+            line-height: 1.7;
         }
 
         .timer-grid {
             display: flex;
             justify-content: space-between;
-            margin-top: 12px;
+            margin-top: 15px;
         }
 
         .time-box {
             background: rgba(212, 175, 55, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            border-radius: 12px;
-            padding: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 14px;
+            padding: 12px 6px;
             width: 22%;
+            backdrop-filter: blur(5px);
         }
 
         .time-num {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: #f59e0b;
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
         }
 
         .time-lbl {
             font-size: 0.65rem;
             color: #94a3b8;
             text-transform: uppercase;
+            margin-top: 3px;
         }
 
         .calendar-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
-            font-size: 0.85rem;
+            margin-top: 12px;
+            font-size: 0.88rem;
         }
 
-        .calendar-table th { color: #d4af37; padding: 6px; }
-        .calendar-table td { padding: 8px; color: #cbd5e1; }
+        .calendar-table th { color: #d4af37; padding: 8px; }
+        .calendar-table td { padding: 9px; color: #cbd5e1; }
 
         .highlight-date {
-            background: #d4af37;
+            background: linear-gradient(135deg, #d4af37, #b8860b);
             color: #000 !important;
             font-weight: bold;
             border-radius: 50%;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.9);
-            animation: pulseGlow 2s infinite alternate;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 1);
+            animation: pulseGlow 1.8s infinite alternate;
         }
 
         @keyframes pulseGlow {
-            from { box-shadow: 0 0 8px rgba(212, 175, 55, 0.6); }
-            to { box-shadow: 0 0 20px rgba(212, 175, 55, 1); }
+            from { box-shadow: 0 0 10px rgba(212, 175, 55, 0.6); transform: scale(1); }
+            to { box-shadow: 0 0 25px rgba(212, 175, 55, 1); transform: scale(1.1); }
         }
 
-        /* Weather Widget Styles */
         .weather-box {
             display: flex;
             align-items: center;
             justify-content: space-around;
-            background: rgba(212, 175, 55, 0.06);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            border-radius: 16px;
-            padding: 15px;
+            background: rgba(212, 175, 55, 0.07);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 18px;
+            padding: 16px;
             margin-top: 12px;
         }
 
         .weather-temp {
-            font-size: 2.2rem;
-            font-weight: 700;
+            font-size: 2.3rem;
+            font-weight: 800;
             color: #f59e0b;
+            text-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
         }
 
         .weather-info {
             text-align: left;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             color: #cbd5e1;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
-        .btn-map, .btn-cal, .btn-share {
+        .btn-map, .btn-share {
             display: inline-block;
-            margin-top: 10px;
-            padding: 12px 20px;
+            margin-top: 12px;
+            padding: 14px 22px;
             background: linear-gradient(135deg, #d4af37, #b8860b);
             color: #000;
-            font-weight: 700;
+            font-weight: 800;
             text-decoration: none;
-            border-radius: 30px;
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+            border-radius: 35px;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
             transition: 0.3s;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             border: none;
             cursor: pointer;
             width: 100%;
             text-align: center;
         }
 
-        .btn-cal-apple {
-            background: rgba(255, 255, 255, 0.1);
-            color: #f8fafc;
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            box-shadow: none;
-        }
+        .btn-map:hover { transform: scale(1.03); box-shadow: 0 12px 30px rgba(212, 175, 55, 0.6); }
 
         .btn-share-tg {
-            background: linear-gradient(135deg, #2AABEE, #229ED9);
+            background: linear-gradient(135deg, #0088cc, #24A1DE);
             color: #ffffff;
-            box-shadow: 0 8px 20px rgba(42, 171, 238, 0.3);
+            box-shadow: 0 8px 25px rgba(36, 161, 222, 0.4);
         }
+
+        .btn-share-tg:hover { transform: scale(1.03); box-shadow: 0 12px 30px rgba(36, 161, 222, 0.7); }
 
         .coords-badge {
             display: inline-block;
-            margin-top: 6px;
-            padding: 4px 10px;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px dashed rgba(212, 175, 55, 0.4);
-            border-radius: 8px;
-            font-size: 0.75rem;
+            margin-top: 8px;
+            padding: 5px 12px;
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px dashed rgba(212, 175, 55, 0.5);
+            border-radius: 10px;
+            font-size: 0.78rem;
             color: #cbd5e1;
         }
 
         .map-frame {
             width: 100%;
-            height: 200px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 12px;
+            height: 210px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 14px;
             margin-top: 10px;
         }
 
@@ -281,38 +332,42 @@
             background: rgba(212, 175, 55, 0.25);
             border: 1px solid #d4af37;
             color: #d4af37;
-            padding: 10px 16px;
+            padding: 10px 18px;
             border-radius: 50px;
             cursor: pointer;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             font-size: 0.85rem;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: 0.3s;
+            font-weight: 700;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+            transition: all 0.3s ease;
         }
+
+        .music-btn:hover { background: #d4af37; color: #000; }
     </style>
 </head>
 <body>
 
-    <!-- Kutib Olish Tabrigi Modali -->
+    <!-- Kutib Olish Tabrigi Modali (Splash Screen) -->
     <div id="splash-screen">
-        <div class="splash-content">
-            <div style="font-size: 3rem; margin-bottom: 10px;">✉️</div>
-            <div class="monogram" style="font-size: 3.2rem;">X & G</div>
-            <p style="color: #cbd5e1; margin-top: 15px; font-size: 0.95rem; line-height: 1.5;">
+        <div class="splash-card">
+            <div style="font-size: 3.5rem; margin-bottom: 10px;">✉️</div>
+            <div class="monogram" style="font-size: 3.8rem;">X & G</div>
+            <p style="color: #e2e8f0; margin-top: 15px; font-size: 1rem; line-height: 1.6;">
                 Assalomu alaykum, muhtaram mehmonimiz!<br>
-                Sizni baxtli kunimizga taklif etamiz.
+                Sizni baxtli va qadrli kunimizga samimiy taklif etamiz.
             </p>
             <button class="btn-open" onclick="openInvitation()">Taklifnomani Ochish ✨</button>
         </div>
     </div>
 
-    <!-- Oltin Zarralar Fon Animatsiyasi -->
+    <!-- Sehrli Oltin Zarralar Fon Animatsiyasi -->
     <canvas id="sparkles-canvas"></canvas>
 
     <!-- Musiqa Boshqaruvi -->
     <button class="music-btn" id="musicBtn" onclick="toggleAudio()">🎵 Musiqa: Off</button>
-    <audio id="bg-audio" loop src="https://cdn.pixabay.com/download/audio/2021/08/09/audio_2760a92f02.mp3"></audio>
+    
+    <!-- O'zbekona Mayin va Go'zal Cholg'u Kuylari (Fon Musiqasi) -->
+    <audio id="bg-audio" loop src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8263309.mp3"></audio>
 
     <div class="container">
 
@@ -324,7 +379,7 @@
 
         <!-- 2-LIST: Bosh Sarlavha -->
         <div class="block">
-            <div style="font-size: 2.2rem;">💍</div>
+            <div class="floating-icon">💍</div>
             <div class="main-title">Nikoh To'yi</div>
             <div class="subtitle">Muhtaram Mehmonimiz</div>
         </div>
@@ -338,18 +393,18 @@
         <div class="block">
             <div class="quote-arabic">وَأَلَّفَ بَيْنَ قُلُوبِهِمْ</div>
             <p class="quote">"Va U ularning qalblarini sevgida birlashtirdi."</p>
-            <p style="font-size: 0.75rem; color: #d4af37; margin-top: 6px;">[Anfol surasi, 63-oyat]</p>
+            <p style="font-size: 0.78rem; color: #d4af37; margin-top: 8px;">[Anfol surasi, 63-oyat]</p>
         </div>
 
         <!-- 5-LIST: Uzuklar va Ehtirom -->
         <div class="block">
             <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=800&q=80" alt="Rings" class="hero-img">
-            <p class="quote" style="margin-top: 12px;">Hayotimizning eng go'zal kunda yonimizda bo'lishingizdan mamnunmiz!</p>
+            <p class="quote" style="margin-top: 14px;">Hayotimizning eng go'zal va mas'uliyatli kunida yonimizda bo'lishingiz biz uchun yuksak sharafdir!</p>
         </div>
 
         <!-- 6-LIST: Taymer -->
         <div class="block">
-            <div style="font-size: 0.8rem; color: #d4af37; text-transform: uppercase;">To'ygacha Qolgan Vaqt:</div>
+            <div style="font-size: 0.82rem; color: #d4af37; text-transform: uppercase; letter-spacing: 2px;">To'ygacha Qolgan Vaqt:</div>
             <div class="timer-grid">
                 <div class="time-box"><div id="days" class="time-num">00</div><div class="time-lbl">Kun</div></div>
                 <div class="time-box"><div id="hours" class="time-num">00</div><div class="time-lbl">Soat</div></div>
@@ -358,9 +413,9 @@
             </div>
         </div>
 
-        <!-- 7-LIST: Kalendar va Saqlash Tugmalari -->
+        <!-- 7-LIST: Kalendar Sheet -->
         <div class="block">
-            <div style="color: #d4af37; font-weight: 600;">Sentyabr 2026</div>
+            <div style="color: #d4af37; font-weight: 700; font-size: 1.1rem;">Sentyabr 2026</div>
             <table class="calendar-table">
                 <tr><th>Du</th><th>Se</th><th>Ch</th><th>Pa</th><th>Ju</th><th>Sh</th><th>Ya</th></tr>
                 <tr><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
@@ -369,19 +424,14 @@
                 <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td class="highlight-date">27</td></tr>
                 <tr><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
             </table>
-            
-            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
-                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Nikoh+To%27yi+-+Nahorgi+Osh&dates=20260927T030000Z/20260927T060000Z&details=Gulyora+To%27xtasinova+to%27yga+taklif+etadi&location=Xonqiz+qishlog%27i,+Yashnaobod+ko%27chasi+65-uy" target="_blank" class="btn-cal">🤖 Android / Google Kalendarga saqlash</a>
-                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Nikoh+To%27yi+-+Nahorgi+Osh&dates=20260927T030000Z/20260927T060000Z&details=Gulyora+To%27xtasinova+to%27yga+taklif+etadi&location=Xonqiz+qishlog%27i,+Yashnaobod+ko%27chasi+65-uy" target="_blank" class="btn-cal btn-cal-apple">🍏 iPhone / Apple Kalendarga saqlash</a>
-            </div>
         </div>
 
-        <!-- 8-LIST: Ob-havo Ma'lumoti (Xonqiz qishlog'i) -->
+        <!-- 8-LIST: Ob-havo Ma'lumoti -->
         <div class="block">
-            <div style="color: #d4af37; font-weight: 600; margin-bottom: 5px;">27-Sentyabr Ob-Havo Ma'lumoti</div>
-            <div style="font-size: 0.75rem; color: #94a3b8;">Farg'ona t., Xonqiz qishlog'i</div>
+            <div style="color: #d4af37; font-weight: 700; font-size: 1rem;">27-Sentyabr Ob-Havo Ma'lumoti</div>
+            <div style="font-size: 0.78rem; color: #94a3b8; margin-top: 2px;">Farg'ona t., Xonqiz qishlog'i</div>
             <div class="weather-box">
-                <div style="font-size: 2.5rem;">☀️</div>
+                <div style="font-size: 2.8rem;">☀️</div>
                 <div class="weather-temp">+26°C</div>
                 <div class="weather-info">
                     <div>• Ochiq va musaffo havo</div>
@@ -389,30 +439,30 @@
                     <div>• Yog'ingarchilik: 0%</div>
                 </div>
             </div>
-            <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 10px; font-style: italic;">"Ajoyib va muattar ob-havoda ko'rishguncha!"</p>
+            <p style="font-size: 0.82rem; color: #cbd5e1; margin-top: 12px; font-style: italic;">"Ajoyib va samimiy ob-havoda ko'rishguncha!"</p>
         </div>
 
-        <!-- 9-LIST: Nahorgi Osh -->
+        <!-- 9-LIST: Nahorgi Osh Dasturxoni -->
         <div class="block">
-            <div style="font-size: 0.85rem; color: #cbd5e1; text-transform: uppercase;">Nahorgi Osh Dasturxoni</div>
-            <div style="font-size: 2.2rem; font-weight: 700; color: #f59e0b; margin: 5px 0;">Soat 08:00 da</div>
-            <p style="font-size: 0.85rem; color: #94a3b8;">Aziz mehmonimiz, to'y oshimizga marhamat qiling!</p>
+            <div style="font-size: 0.85rem; color: #cbd5e1; text-transform: uppercase; letter-spacing: 2px;">Nahorgi Osh Dasturxoni</div>
+            <div style="font-size: 2.5rem; font-weight: 800; color: #f59e0b; margin: 6px 0; text-shadow: 0 0 15px rgba(245, 158, 11, 0.4);">Soat 08:00 da</div>
+            <p style="font-size: 0.88rem; color: #94a3b8;">Aziz va muhtaram mehmonimiz, fayzli to'y oshimizga marhamat qiling!</p>
         </div>
 
         <!-- 10-LIST: Manzil -->
         <div class="block">
-            <div style="color: #d4af37; font-weight: 600;">Manzilimiz:</div>
-            <p style="font-size: 0.9rem; color: #e2e8f0; margin-top: 5px;">Farg'ona viloyati, Farg'ona tumani, Xonqiz qishlog'i, Yashnaobod ko'chasi, 65-uy</p>
-            <div class="coords-badge">📍 Coords: 40.292947, 71.488362</div>
+            <div style="color: #d4af37; font-weight: 700; font-size: 1.05rem;">Manzilimiz:</div>
+            <p style="font-size: 0.95rem; color: #e2e8f0; margin-top: 6px; line-height: 1.5;">Farg'ona viloyati, Farg'ona tumani, Xonqiz qishlog'i, Yashnaobod ko'chasi, 65-uy</p>
+            <div class="coords-badge">📍 GPS: 40.292947, 71.488362</div>
         </div>
 
         <!-- 11-LIST: Google Maps Xaritasi -->
         <div class="block">
-            <div style="color: #d4af37; font-weight: 600; margin-bottom: 5px;">Xarita</div>
+            <div style="color: #d4af37; font-weight: 700; margin-bottom: 6px;">Xarita</div>
             <iframe class="map-frame" src="https://maps.google.com/maps?q=40.292947,71.488362&z=17&output=embed" allowfullscreen="" loading="lazy"></iframe>
         </div>
 
-        <!-- 12-LIST: Marshrut Tugmasi -->
+        <!-- 12-LIST: Navigatsiya Tugmasi -->
         <div class="block">
             <p style="font-size: 0.85rem; color: #94a3b8;">Avtonavigatsiya orqali osongina yetib keling:</p>
             <a href="https://www.google.com/maps/dir/?api=1&destination=40.292947,71.488362" target="_blank" class="btn-map">📍 Google Maps'da Ochish</a>
@@ -421,29 +471,28 @@
         <!-- 13-LIST: Taklif Etuvchi -->
         <div class="block">
             <p style="font-size: 0.85rem; color: #94a3b8;">Ehtirom bilan taklif etuvchi:</p>
-            <div style="font-size: 1.2rem; font-weight: 600; color: #d4af37; margin-top: 5px;">Gulyora To'xtasinova</div>
+            <div style="font-size: 1.3rem; font-weight: 700; color: #d4af37; margin-top: 6px; letter-spacing: 1px;">Gulyora To'xtasinova</div>
         </div>
 
-        <!-- 14-LIST: Telegram Orqali Ulashish va Yakuniy Tilak -->
+        <!-- 14-LIST: Telegram Ulashish & Yakun -->
         <div class="block">
-            <div style="font-size: 1.8rem; color: #d4af37;">X & G</div>
-            <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 5px;">Tashrifingiz biz uchun yuksak sharafdir!</p>
+            <div style="font-size: 2rem; color: #d4af37;">X & G</div>
+            <p style="font-size: 0.88rem; color: #cbd5e1; margin-top: 6px;">Tashrifingiz xonadonimizga quvonch va fayz bag'ishlaydi!</p>
             
-            <button onclick="shareTelegram()" class="btn-share btn-share-tg" style="margin-top: 15px;">🚀 Telegram Orqali Ulashish</button>
+            <button onclick="shareTelegram()" class="btn-share btn-share-tg" style="margin-top: 18px;">🚀 Telegram Orqali Ulashish</button>
             
-            <div style="font-size: 1.2rem; margin-top: 12px;">✨ 🕊️ ✨</div>
+            <div style="font-size: 1.3rem; margin-top: 14px;">✨ 🕊️ ✨</div>
         </div>
 
     </div>
 
     <script>
-        // Kirish ekranini yopish va musiqani yoqish
+        // Kirish ekranini yopish va o'zbekona musiqani ijro etish
         function openInvitation() {
             const splash = document.getElementById('splash-screen');
             splash.style.opacity = '0';
             splash.style.visibility = 'hidden';
             
-            // Audio avtomatik ijrosi
             const audio = document.getElementById('bg-audio');
             const btn = document.getElementById('musicBtn');
             audio.play().then(() => {
@@ -453,7 +502,7 @@
             });
         }
 
-        // Countdown Timer
+        // Aks Hisob (Countdown) Timer
         const weddingDate = new Date(2026, 8, 27, 8, 0, 0).getTime();
 
         function updateCountdown() {
@@ -475,7 +524,7 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Audio Control
+        // Musiqa Boshqaruvi
         function toggleAudio() {
             const audio = document.getElementById('bg-audio');
             const btn = document.getElementById('musicBtn');
@@ -495,7 +544,7 @@
             window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
         }
 
-        // Canvas Sparkles
+        // Oltin Zarrachalar Animatsiyasi (Canvas Sparkles)
         const canvas = document.getElementById('sparkles-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -511,9 +560,9 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2.5 + 0.5;
-                this.speedY = Math.random() * 0.8 + 0.2;
-                this.opacity = Math.random() * 0.8 + 0.2;
+                this.size = Math.random() * 2.8 + 0.6;
+                this.speedY = Math.random() * 0.7 + 0.2;
+                this.opacity = Math.random() * 0.85 + 0.15;
             }
             update() {
                 this.y -= this.speedY;
@@ -532,7 +581,7 @@
 
         function initParticles() {
             particles = [];
-            for (let i = 0; i < 65; i++) {
+            for (let i = 0; i < 75; i++) {
                 particles.push(new Particle());
             }
         }
